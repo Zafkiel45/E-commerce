@@ -1,14 +1,14 @@
 import { Model } from "./model"
 
-export const Eletronics = () => {
+export const MenCloths = () => {
     return (
-        <div className="bg-blue-600 w-screen py-5 h-auto gap-5 flex flex-col">
+        <div className="bg-black w-screen py-5 h-auto gap-5 flex flex-col">
             <div>
                 <p className="text-white relative left-4 text-lg font-medium">
-                    Eletrônicos
+                   Roupas Masculinas;
                 </p>
             </div>
-            <Model currentCategorie="electronics"/>
+            <Model currentCategorie="men's clothing"/>
         </div>
     )
 }
