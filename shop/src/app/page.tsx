@@ -7,6 +7,7 @@ import { Jewelery } from "./components/products/joias";
 import { WomanCloths } from "./components/products/woman";
 import { ADS1, ADS2, ADS3 } from "./components/ads";
 import { MenCloths } from "./components/products/men";
+import { Footer } from "./components/footer";
 
 export default function Home() {
   return (
@@ -22,6 +23,7 @@ export default function Home() {
       <WomanCloths/>
       <ADS3/>
       <MenCloths/>
+      <Footer/>
     </>
   );
 }
