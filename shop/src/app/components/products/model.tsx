@@ -3,6 +3,7 @@ import { getAllElementsOfCategorie, objectOfApi } from "@/app/api/calls";
 import { useState, useRef, useEffect } from "react";
 import { LeftButton, RightButton } from "./buttons";
 import Image from "next/image";
+import Link from "next/link";
 
 interface ModelProps {
   currentCategorie: string;
@@ -51,11 +52,13 @@ export const Model = ({ currentCategorie }: ModelProps) => {
           style={{ transform: `translateX(${position}px)` }}
           className="w-full flex gap-3 h-fit"
         >
-          {api.map((item) => {
+          {api.map((item, idx) => {
             return (
               <div className="bg-white flex-shrink-0 flex flex-col gap-4 rounded-md w-52 border-gray-200 p-4">
                 <div className="flex justify-center items-center">
-                  <Image className="min-h-[130px] object-contain min-w-[130px]" src={item.image} alt="" height={100} width={100} />
+                  <Link href={`/item/${idx}`}>
+                    <Image className="min-h-[130px] object-contain min-w-[130px]" src={item.image} alt="" height={100} width={100} />
+                  </Link>
                 </div>
                 <div className="flex flex-col gap-1">
                   <div className="text-black font-medium text-sm">{item.title}</div>
