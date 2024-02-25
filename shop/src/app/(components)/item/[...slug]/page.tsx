@@ -3,8 +3,7 @@ import { Header } from "../../header";
 import { Items } from "../../items";
 import Image from "next/image";
 
-
-export default async function Page({params}: {params: {slug: string} }) {
+export default async function Page({params}: {params: {slug: string[]} }) {
 
     const currentItem = await getAllElements()
 
@@ -14,7 +13,7 @@ export default async function Page({params}: {params: {slug: string} }) {
             <Items/>
             <div>
                 <div>
-                    <Image src={params.slug} alt=""/>
+                    <Image src={params.slug} height={150} width={150} alt=""/>
                 </div>
             </div>
         </>
