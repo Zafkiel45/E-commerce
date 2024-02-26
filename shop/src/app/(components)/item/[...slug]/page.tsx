@@ -4,14 +4,38 @@ import { Header } from "../../header";
 import { Items } from "../../items";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { useState, useEffect } from "react";
 
 export default async function Page({params}: {params: {slug: string[]} }) {
 
     const currentURL = usePathname();
     const URLArray = currentURL.split('/');
-    const indexOfElement = parseInt(URLArray[3])
-    const currentItem = await getAllElementsOfCategorie(URLArray[2])
-    
+    const indexOfElement = parseInt(URLArray[3]);
+    const currentItem = await getAllElementsOfCategorie(URLArray[2]);
+
+    const key = 'productInCar'
+    const currentDate = new Date();
+    const date = currentDate.getDate();
+    const month = currentDate.getMonth();
+    const year  = currentDate.getFullYear();
+
+    interface LocalStorageInterface {
+        name: string;
+        date: string;
+        price: string;
+        image: string;
+    }
+    const addProductToCar = async () => {
+        const Storage: LocalStorageInterface[] = await JSON.parse(localStorage.getItem(key) || '[]');
+        Storage.push({
+            name: currentItem[indexOfElement].title,
+            date: `${date}/${month}/${year}`,
+            price: currentItem[indexOfElement].price,
+            image: currentItem[indexOfElement].image 
+        })
+        localStorage.setItem(key, JSON.stringify(Storage));   
+    }
+
     return (
         <>
             <Header/>
@@ -31,7 +55,7 @@ export default async function Page({params}: {params: {slug: string[]} }) {
                     <button className="bg-blue-500 w-full text-white font-medium p-4 rounded-lg shadow-md active:relative active:-bottom-1">
                         Comprar
                     </button>
-                    <button className="bg-orange-500 w-full text-white font-medium p-4 rounded-lg shadow-md active:relative active:-bottom-1">
+                    <button onClick={addProductToCar} className="bg-orange-500 w-full text-white font-medium p-4 rounded-lg shadow-md active:relative active:-bottom-1">
                         Adicionar ao carrinho
                     </button>
                 </div>
@@ -73,3 +97,6 @@ export const generateMetaData = ({params}: {params: {slug: string} }) => {
         title: `${params.slug}`
     })
 }
+
+
+
