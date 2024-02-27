@@ -4,7 +4,6 @@ import { Header } from "../../header";
 import { Items } from "../../items";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
 
 export default async function Page({params}: {params: {slug: string[]} }) {
 
@@ -25,15 +24,24 @@ export default async function Page({params}: {params: {slug: string[]} }) {
         price: string;
         image: string;
     }
+
     const addProductToCar = async () => {
         const Storage: LocalStorageInterface[] = await JSON.parse(localStorage.getItem(key) || '[]');
-        Storage.push({
-            name: currentItem[indexOfElement].title,
-            date: `${date}/${month}/${year}`,
-            price: currentItem[indexOfElement].price,
-            image: currentItem[indexOfElement].image 
-        })
-        localStorage.setItem(key, JSON.stringify(Storage));   
+        try {
+            if(!Storage) {
+                throw new Error("O LocalStorage está vazio");
+            }
+            Storage.push({
+                name: currentItem[indexOfElement].title,
+                date: `${date}/${month}/${year}`,
+                price: currentItem[indexOfElement].price,
+                image: currentItem[indexOfElement].image 
+            })
+            localStorage.setItem(key, JSON.stringify(Storage));  
+        } catch (mensage) {
+            console.log(mensage)
+        }
+
     }
 
     return (
