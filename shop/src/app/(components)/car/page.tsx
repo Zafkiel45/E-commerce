@@ -3,6 +3,7 @@ import { Header } from "../header"
 import { Items } from "../items"
 import { useEffect, useState } from "react"
 import Image from "next/image"
+import Link from "next/link"
 
 export default function CardRoute() {
     
@@ -41,7 +42,7 @@ export default function CardRoute() {
         <>
             <Header/>
             <Items/>
-            <div className="w-full">
+            <div className="w-full flex min-h-[70vh] h-auto flex-col items-center">
                 {local.map((item, idx) => {
                     return (
                         <div className="flex gap-2 p-3 border-b border-b-gray-300">
@@ -65,6 +66,13 @@ export default function CardRoute() {
                         </div>
                     )
                 })}
+            </div>
+            <div className="w-full px-2 my-2 self-end">
+                <Link href={"#"}>                    
+                    <button className="bg-[#4452CA] rounded-md shadow-md p-3 text-white font-medium w-full">
+                        Finalizar Compra
+                    </button>
+                </Link>
             </div>
         </>
     )
