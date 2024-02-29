@@ -68,7 +68,7 @@ export default function CardRoute() {
                 })}
             </div>
             <div className="w-full px-2 my-2 self-end">
-                <Link href={"#"}>                    
+                <Link href={"/payRote"}>                    
                     <button className="bg-[#4452CA] rounded-md shadow-md p-3 text-white font-medium w-full">
                         Finalizar Compra
                     </button>
