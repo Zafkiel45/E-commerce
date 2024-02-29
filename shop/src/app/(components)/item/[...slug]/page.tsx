@@ -1,16 +1,34 @@
 'use client'
-import { getAllElementsOfCategorie } from "@/app/api/calls"
+import { getAllElementsOfCategorie, objectOfApi } from "@/app/api/calls"
 import { Header } from "../../header";
 import { Items } from "../../items";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { useState, useEffect} from 'react'
 
-export default async function Page({params}: {params: {slug: string[]} }) {
+export default function Page({params}: {params: {slug: string[]} }) {
 
+    const [currentItem, setCurrentItem] = useState<objectOfApi[]>([])
     const currentURL = usePathname();
     const URLArray = currentURL.split('/');
     const indexOfElement = parseInt(URLArray[3]);
-    const currentItem = await getAllElementsOfCategorie(URLArray[2]);
+    useEffect(() => {
+      
+        const CallOfItem = async () => {
+            const items = await getAllElementsOfCategorie(URLArray[2]);
+
+            try {
+                if(items) {
+                    setCurrentItem(items);
+                } else {
+                    throw Error("LocalStorage is empty");
+                }
+            } catch (error) {
+                console.log(error)
+            }
+        } 
+        CallOfItem()
+    })
 
     const key = 'productInCar'
     const currentDate = new Date();
