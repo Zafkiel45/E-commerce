@@ -54,7 +54,7 @@ export const Model = ({ currentCategorie }: ModelProps) => {
         >
           {api.map((item, idx) => {
             return (
-              <Link href={`/item/${currentCategorie}/${idx}`}>
+              <Link key={item.id} href={`/item/${currentCategorie}/${idx}`}>
                 <div className="bg-white flex-shrink-0 flex flex-col gap-4 rounded-md w-52 border-gray-200 p-4">
                   <div className="flex justify-center items-center">
                       <Image className="min-h-[130px] object-contain min-w-[130px]" src={item.image} alt="" height={100} width={100} />

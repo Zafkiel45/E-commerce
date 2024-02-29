@@ -45,7 +45,7 @@ export default function CardRoute() {
             <div className="w-full flex min-h-[70vh] h-auto flex-col items-center">
                 {local.map((item, idx) => {
                     return (
-                        <div className="flex gap-2 p-3 border-b border-b-gray-300">
+                        <div key={idx} className="flex gap-2 p-3 border-b border-b-gray-300">
                             <div className="flex justify-center w-16 items-center">
                                 <Image src={item.image} alt="" height={50} width={50}/>
                             </div>

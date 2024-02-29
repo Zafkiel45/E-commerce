@@ -100,11 +100,5 @@ export default async function Page({params}: {params: {slug: string[]} }) {
     )
 }
 
-export const generateMetaData = ({params}: {params: {slug: string} }) => {
-    return({
-        title: `${params.slug}`
-    })
-}
-
 
 
