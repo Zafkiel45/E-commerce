@@ -28,7 +28,7 @@ export default function Page({params}: {params: {slug: string[]} }) {
             }
         } 
         CallOfItem()
-    })
+    }, [])
 
     const key = 'productInCar'
     const currentDate = new Date();
