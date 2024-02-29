@@ -4,7 +4,7 @@ import { Header } from "../../header";
 import { Items } from "../../items";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 
 export default function Page({params}: {params: {slug: string[]} }) {
 
@@ -13,7 +13,6 @@ export default function Page({params}: {params: {slug: string[]} }) {
     const URLArray = currentURL.split('/');
     const indexOfElement = parseInt(URLArray[3]);
     useEffect(() => {
-      
         const CallOfItem = async () => {
             const items = await getAllElementsOfCategorie(URLArray[2]);
 
@@ -42,6 +41,8 @@ export default function Page({params}: {params: {slug: string[]} }) {
         price: string;
         image: string;
     }
+    const item = currentItem[indexOfElement];
+    const hasItem = item && indexOfElement >= 0 && indexOfElement < currentItem.length;
 
     const addProductToCar = async () => {
         const Storage: LocalStorageInterface[] = await JSON.parse(localStorage.getItem(key) || '[]');
@@ -68,14 +69,16 @@ export default function Page({params}: {params: {slug: string[]} }) {
             <Items/>
             <div className="px-4 pb-10 flex gap-3 flex-col items-center">
                 <div className="mt-10">
-                    <Image src={currentItem[indexOfElement].image} height={150} width={150} alt=""/>
+                    {hasItem && ( 
+                        <Image src={item.image} height={150} width={150} alt=""/>
+                    )}
                 </div>
                 <div className="font-medium">
-                    Nome: {currentItem[indexOfElement].title}
+                  Nome: {hasItem && item.title}
                 </div>
                 <div className="flex gap-2 w-full justify-start items-center">
                     <span className="text-gray-400 text-sm">Frete: <del>27,90 R$</del> 00,00 R$</span>
-                    <span className="text-green-600 text-sm">Preço: {currentItem[indexOfElement].price} R$</span>
+                    <span className="text-green-600 text-sm">Preço: {hasItem && item.price} R$</span>
                 </div>
                 <div className="w-full mt-4 flex gap-3 flex-col items-center">
                     <button className="bg-blue-500 w-full text-white font-medium p-4 rounded-lg shadow-md active:relative active:-bottom-1">
@@ -106,10 +109,10 @@ export default function Page({params}: {params: {slug: string[]} }) {
                     <div className="bg-[#4451CA] py-2 rounded-md shadow-md text-white">
                         <ol className="flex flex-col justify-center gap-2">
                             <li className="p-3">Ficha técnica</li>
-                            <li className="p-3 bg-[#8993F2]">Nome: {currentItem[indexOfElement].title}</li>
-                            <li className="p-3">Preço: {currentItem[indexOfElement].price} R$</li>
-                            <li className="p-3 bg-[#8993F2]">Descrição: {currentItem[indexOfElement].description}</li>
-                            <li className="p-3">Categoria: {currentItem[indexOfElement].category}</li>
+                            <li className="p-3 bg-[#8993F2]">Nome: {hasItem && (item.title)}</li>
+                            <li className="p-3">Preço: {hasItem && (item.price)} R$</li>
+                            <li className="p-3 bg-[#8993F2]">Descrição: {hasItem && (item.description)} </li>
+                            <li className="p-3">Categoria: {hasItem && (item.category)} </li>
                         </ol>
                     </div>
                 </div>
