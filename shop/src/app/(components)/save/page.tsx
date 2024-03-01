@@ -1,13 +1,13 @@
 'use client'
 import { Header } from "../header"
 import { Items } from "../items"
-import { MouseEvent, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 
 export default function CardRoute() {
     
-    const key = 'productInCar'
+    const key = 'saveInCar'
     interface LocalStorageInterface {
         name: string;
         date: string;
@@ -30,8 +30,7 @@ export default function CardRoute() {
             }
             allElementsInCar();
     },[]);
-    const removeItem = (index: number, e: React.MouseEvent<HTMLButtonElement>) => {
-        e.stopPropagation();
+    const removeItem = (index: number) => {
         const AllElementsAvaliable = local;
         const AllElementsFilted = AllElementsAvaliable.filter((_item, currentIdx) => {
             return currentIdx != index
@@ -45,13 +44,18 @@ export default function CardRoute() {
             <Header/>
             <Items/>
             <div className="w-full flex min-h-[70vh] h-auto flex-col items-center">
-                {local.map((item, idx) => {
+                {local.length === 0 ? (
+                    <div className="flex items-center justify-center h-[81vh] w-screen">
+                        <p>
+                            Sua lista de desejos esta vazia!
+                        </p>
+                    </div>
+                ): local.map((item, idx) => {
                     return (
-                        <div key={idx} className="flex gap-2 w-full p-3 border-b border-b-gray-300">
+                            <Link key={idx} href={`/item/${item.categorie}/${idx}`}>
+                                <div key={idx} className="flex gap-2 w-full p-3 border-b border-b-gray-300">
                                     <div className="flex justify-center w-16 items-center">
-                                        <Link key={idx} href={`/item/${item.categorie}/${idx}`}>
-                                            <Image src={item.image} alt="" height={50} width={50}/>
-                                        </Link>
+                                        <Image src={item.image} alt="" height={50} width={50}/>
                                     </div>
                                     <div className="flex gap-1 w-full flex-col">
                                         <div className="text-sm">{item.name}</div>
@@ -62,20 +66,14 @@ export default function CardRoute() {
                                             {item.date}
                                         </div>
                                         <div>
-                                            <button onClick={(e) => removeItem(idx, e)} className="bg-red-500 rounded-md shadow-sm text-white font-medium px-2 text-sm py-1">
+                                            <button onClick={() => removeItem(idx)} className="bg-red-500 rounded-md shadow-sm text-white font-medium px-2 text-sm py-1">
                                                 Remover
                                             </button>
                                         </div>
                                     </div>
-                            </div>
+                                </div>
+                            </Link>
                         )})}
-            </div>
-            <div className="w-full px-2 my-2 self-end">
-                <Link href={"/payRote"}>                    
-                    <button className="bg-[#4452CA] rounded-md shadow-md p-3 text-white font-medium w-full">
-                        Finalizar Compra
-                    </button>
-                </Link>
             </div>
         </>
     )

@@ -29,7 +29,6 @@ export default function Page({params}: {params: {slug: string[]} }) {
         CallOfItem()
     }, [])
 
-    const key = 'productInCar'
     const currentDate = new Date();
     const date = currentDate.getDate();
     const month = currentDate.getMonth() + 1;
@@ -40,12 +39,13 @@ export default function Page({params}: {params: {slug: string[]} }) {
         date: string;
         price: string;
         image: string;
+        categorie: string;
     }
     const item = currentItem[indexOfElement];
     const hasItem = item && indexOfElement >= 0 && indexOfElement < currentItem.length;
 
-    const addProductToCar = async () => {
-        const Storage: LocalStorageInterface[] = await JSON.parse(localStorage.getItem(key) || '[]');
+    const addProductToCar = async (nameOfStorage: string) => {
+        const Storage: LocalStorageInterface[] = await JSON.parse(localStorage.getItem(nameOfStorage) || '[]');
         try {
             if(!Storage) {
                 throw new Error("O LocalStorage está vazio");
@@ -54,9 +54,10 @@ export default function Page({params}: {params: {slug: string[]} }) {
                 name: currentItem[indexOfElement].title,
                 date: `${date}/${month}/${year}`,
                 price: currentItem[indexOfElement].price,
-                image: currentItem[indexOfElement].image 
+                image: currentItem[indexOfElement].image,
+                categorie: currentItem[indexOfElement].category 
             })
-            localStorage.setItem(key, JSON.stringify(Storage));  
+            localStorage.setItem(nameOfStorage, JSON.stringify(Storage));  
         } catch (mensage) {
             console.log(mensage)
         }
@@ -68,10 +69,15 @@ export default function Page({params}: {params: {slug: string[]} }) {
             <Header/>
             <Items/>
             <div className="px-4 pb-10 flex gap-3 flex-col items-center">
-                <div className="mt-10">
+                <div className="mt-10 relative">
                     {hasItem && ( 
                         <Image src={item.image} height={150} width={150} alt=""/>
                     )}
+                    <div onClick={() => addProductToCar('saveInCar')} className="absolute bg-orange-500 -top-5 -left-14 p-2 rounded-full">
+                        <svg width="24" height="24" viewBox="0 0 24 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fillRule="evenodd" clipRule="evenodd" d="M12 17.5208L17.5 22.3542V6.64584H6.5V22.3542L12 17.5208ZM8.5 17.6084L12 14.5326L15.5 17.6084V9.06251H8.5V17.6084Z" fill="white"/>
+                        </svg>
+                    </div>
                 </div>
                 <div className="font-medium">
                   Nome: {hasItem && item.title}
@@ -84,7 +90,7 @@ export default function Page({params}: {params: {slug: string[]} }) {
                     <button className="bg-blue-500 w-full text-white font-medium p-4 rounded-lg shadow-md active:relative active:-bottom-1">
                         Comprar
                     </button>
-                    <button onClick={addProductToCar} className="bg-orange-500 w-full text-white font-medium p-4 rounded-lg shadow-md active:relative active:-bottom-1">
+                    <button onClick={() => addProductToCar('productInCar')} className="bg-orange-500 w-full text-white font-medium p-4 rounded-lg shadow-md active:relative active:-bottom-1">
                         Adicionar ao carrinho
                     </button>
                 </div>

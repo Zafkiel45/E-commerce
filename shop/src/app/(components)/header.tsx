@@ -14,6 +14,15 @@ export const Header = () => {
                             </svg>
                         </div>
                     </li>
+                    <Link href={'/save'}>
+                    <li>
+                        <button className="bg-[#4452CA] p-1 rounded-sm active:relative active:-bottom-1">
+                            <svg width="24" height="24" viewBox="0 0 24 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fillRule="evenodd" clipRule="evenodd" d="M12 17.5208L17.5 22.3542V6.64584H6.5V22.3542L12 17.5208ZM8.5 17.6084L12 14.5326L15.5 17.6084V9.06251H8.5V17.6084Z" fill="white"/>
+                            </svg>
+                        </button>
+                    </li>
+                    </Link>
                     <Link href={'/'}>                    
                         <li>
                             <button className="bg-[#4452CA] p-1 rounded-sm active:relative active:-bottom-1">
