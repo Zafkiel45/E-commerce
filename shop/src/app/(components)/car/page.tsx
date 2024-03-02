@@ -43,15 +43,12 @@ export default function CardRoute() {
     return (
         <>
             <Header/>
-            <Items/>
             <div className="w-full flex min-h-[70vh] h-auto flex-col items-center">
                 {local.map((item, idx) => {
                     return (
                         <div key={idx} className="flex gap-2 w-full p-3 border-b border-b-gray-300">
                                     <div className="flex justify-center w-16 items-center">
-                                        <Link key={idx} href={`/item/${item.categorie}/${idx}`}>
-                                            <Image src={item.image} alt="" height={50} width={50}/>
-                                        </Link>
+                                        <Image src={item.image} alt="" height={50} width={50}/>
                                     </div>
                                     <div className="flex gap-1 w-full flex-col">
                                         <div className="text-sm">{item.name}</div>
@@ -59,7 +56,7 @@ export default function CardRoute() {
                                             total: <span className="text-green-500 ">{item.price} R$</span>
                                         </div>
                                         <div className="text-xs font-bold text-gray-400">
-                                            {item.date}
+                                            Adicionado: {item.date}
                                         </div>
                                         <div>
                                             <button onClick={(e) => removeItem(idx, e)} className="bg-red-500 rounded-md shadow-sm text-white font-medium px-2 text-sm py-1">

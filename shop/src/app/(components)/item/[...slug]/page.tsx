@@ -67,7 +67,6 @@ export default function Page({params}: {params: {slug: string[]} }) {
     return (
         <>
             <Header/>
-            <Items/>
             <div className="px-4 pb-10 flex gap-3 flex-col items-center">
                 <div className="mt-10 relative">
                     {hasItem && ( 

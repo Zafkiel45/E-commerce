@@ -1,5 +1,6 @@
 "use client";
 import { getAllElementsOfCategorie, objectOfApi } from "@/app/api/calls";
+import { Carrossel } from "../(carrossel)/slide";
 import { useState, useRef, useEffect } from "react";
 import { LeftButton, RightButton } from "./buttons";
 import Image from "next/image";
@@ -46,32 +47,9 @@ export const Model = ({ currentCategorie }: ModelProps) => {
 
   return (
     <div className="flex w-full gap-4 justify-center items-center">
-      <LeftButton currentEvent={leftEventButton} />
-      <div ref={ClientRef} className="overflow-hidden w-52">
-        <div
-          style={{ transform: `translateX(${position}px)` }}
-          className="w-full flex gap-3 h-fit"
-        >
-          {api.map((item, idx) => {
-            return (
-              <Link key={item.id} href={`/item/${currentCategorie}/${idx}`}>
-                <div className="bg-white flex-shrink-0 flex flex-col gap-4 rounded-md w-52 border-gray-200 p-4">
-                  <div className="flex justify-center items-center">
-                      <Image className="min-h-[130px] object-contain min-w-[130px]" src={item.image} alt="" height={100} width={100} />
-                  </div>
-                  <div className="flex flex-col gap-1">
-                    <div className="text-black font-medium text-sm">{item.title}</div>
-                    <div className="text-green-500 font-medium">{item.price} R$</div>
-                    <div className="text-sm text-gray-400">Frete: <del>21,43 R$</del> 00,00 R$</div>
-                    <div className="text-sm text-gray-400">Loja: Lorem Ipsum</div>
-                  </div>
-                </div>
-              </Link>
-            );
-          })}
-        </div>
+      <div ref={ClientRef} className="overflow-hidden mobile-big:w-56 w-52">
+          <Carrossel items={api} currentCategorie={currentCategorie}/>
       </div>
-      <RightButton currentEvent={RightEventButton} />
     </div>
   );
 };

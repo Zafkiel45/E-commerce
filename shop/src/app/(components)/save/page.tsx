@@ -42,7 +42,6 @@ export default function CardRoute() {
     return (
         <>
             <Header/>
-            <Items/>
             <div className="w-full flex min-h-[70vh] h-auto flex-col items-center">
                 {local.length === 0 ? (
                     <div className="flex items-center justify-center h-[81vh] w-screen">
@@ -52,8 +51,7 @@ export default function CardRoute() {
                     </div>
                 ): local.map((item, idx) => {
                     return (
-                            <Link key={idx} href={`/item/${item.categorie}/${idx}`}>
-                                <div key={idx} className="flex gap-2 w-full p-3 border-b border-b-gray-300">
+                            <div key={idx} className="flex gap-2 w-full p-3 border-b border-b-gray-300">
                                     <div className="flex justify-center w-16 items-center">
                                         <Image src={item.image} alt="" height={50} width={50}/>
                                     </div>
@@ -72,7 +70,6 @@ export default function CardRoute() {
                                         </div>
                                     </div>
                                 </div>
-                            </Link>
                         )})}
             </div>
         </>
