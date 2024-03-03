@@ -1,7 +1,6 @@
 'use client'
 import { getAllElementsOfCategorie, objectOfApi } from "@/app/api/calls"
 import { Header } from "../../header";
-import { Items } from "../../items";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from 'react'
@@ -68,9 +67,9 @@ export default function Page({params}: {params: {slug: string[]} }) {
         <>
             <Header/>
             <div className="px-4 pb-10 flex gap-3 flex-col items-center">
-                <div className="mt-10 relative">
+                <div className="mt-10 tablet:mt-14 relative">
                     {hasItem && ( 
-                        <Image src={item.image} height={150} width={150} alt=""/>
+                        <Image src={item.image} height={170} width={170} alt=""/>
                     )}
                     <div onClick={() => addProductToCar('saveInCar')} className="absolute bg-orange-500 -top-5 -left-14 p-2 rounded-full">
                         <svg width="24" height="24" viewBox="0 0 24 29" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -78,14 +77,14 @@ export default function Page({params}: {params: {slug: string[]} }) {
                         </svg>
                     </div>
                 </div>
-                <div className="font-medium">
+                <div className="font-medium flex tablet-big:text-xl tablet-big:w-[700px] tablet:w-4/5 justify-start w-full mobile-big:text-lg tablet:text-xl">
                   Nome: {hasItem && item.title}
                 </div>
-                <div className="flex gap-2 w-full justify-start items-center">
-                    <span className="text-gray-400 text-sm">Frete: <del>27,90 R$</del> 00,00 R$</span>
-                    <span className="text-green-600 text-sm">Preço: {hasItem && item.price} R$</span>
+                <div className="flex gap-2 w-full tablet-big:w-[700px] tablet:w-4/5 justify-start items-center">
+                    <span className="text-gray-400 text-sm tablet:text-base">Frete: <del>27,90 R$</del> 00,00 R$</span>
+                    <span className="text-green-600 text-sm tablet:text-base">Preço: {hasItem && item.price} R$</span>
                 </div>
-                <div className="w-full mt-4 flex gap-3 flex-col items-center">
+                <div className="w-full tablet-big:w-[700px] tablet:w-4/5 mt-4 flex gap-3 flex-col items-center">
                     <button className="bg-blue-500 w-full text-white font-medium p-4 rounded-lg shadow-md active:relative active:-bottom-1">
                         Comprar
                     </button>
@@ -93,8 +92,8 @@ export default function Page({params}: {params: {slug: string[]} }) {
                         Adicionar ao carrinho
                     </button>
                 </div>
-                <div className="flex flex-col gap-3">
-                    <div className="bg-red-500 flex flex-col gap-2 p-3 rounded-md">
+                <div className="flex flex-col tablet-big:w-[700px] tablet:w-4/5 gap-3">
+                    <div className="bg-red-400 flex flex-col gap-2 p-3 rounded-md">
                         <div className="flex gap-2">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M13 12.5L13 8.5H11L11 12.5H13Z" fill="whit"/>

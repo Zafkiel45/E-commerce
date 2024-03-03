@@ -1,9 +1,7 @@
 'use client'
 import { Header } from "../header"
-import { Items } from "../items"
 import { useEffect, useState } from "react"
 import Image from "next/image"
-import Link from "next/link"
 
 export default function CardRoute() {
     
@@ -45,26 +43,26 @@ export default function CardRoute() {
             <div className="w-full flex min-h-[70vh] h-auto flex-col items-center">
                 {local.length === 0 ? (
                     <div className="flex items-center justify-center h-[81vh] w-screen">
-                        <p>
+                        <p className="mobile-big:text-lg tablet:text-xl tablet-big:text-2xl">
                             Sua lista de desejos esta vazia!
                         </p>
                     </div>
                 ): local.map((item, idx) => {
                     return (
-                            <div key={idx} className="flex gap-2 w-full p-3 border-b border-b-gray-300">
-                                    <div className="flex justify-center w-16 items-center">
+                            <div key={idx} className="flex gap-2 w-full mobile-big:p-5 p-3 border-b border-b-gray-300">
+                                    <div className="flex justify-center mobile-big:w-20 w-16 items-center">
                                         <Image src={item.image} alt="" height={50} width={50}/>
                                     </div>
                                     <div className="flex gap-1 w-full flex-col">
-                                        <div className="text-sm">{item.name}</div>
-                                        <div className="text-sm font-medium">
+                                        <div className="text-sm mobile-big:text-base tablet-big:text-lg">{item.name}</div>
+                                        <div className="text-sm mobile-big:text-base tablet-big:text-lg font-medium">
                                             total: <span className="text-green-500 ">{item.price} R$</span>
                                         </div>
-                                        <div className="text-xs font-bold text-gray-400">
+                                        <div className="text-xs mobile-big:text-sm tablet-big:text-base font-bold text-gray-400">
                                             {item.date}
                                         </div>
                                         <div>
-                                            <button onClick={() => removeItem(idx)} className="bg-red-500 rounded-md shadow-sm text-white font-medium px-2 text-sm py-1">
+                                            <button onClick={() => removeItem(idx)} className="bg-red-500 rounded-md shadow-sm text-white font-medium  px-2 tablet-big:text-base text-sm py-1">
                                                 Remover
                                             </button>
                                         </div>

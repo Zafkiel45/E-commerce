@@ -15,6 +15,9 @@ const config: Config = {
       },
       screens: {
         'mobile-big': '470px',
+        'tablet': '720px',
+        'tablet-big': '900px',
+        'desktop': '1320px',
       }
     },
   },

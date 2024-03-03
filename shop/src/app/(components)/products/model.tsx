@@ -47,7 +47,7 @@ export const Model = ({ currentCategorie }: ModelProps) => {
 
   return (
     <div className="flex w-full gap-4 justify-center items-center">
-      <div ref={ClientRef} className="overflow-hidden mobile-big:w-56 w-52">
+      <div ref={ClientRef} className="overflow-hidden w-11/12">
           <Carrossel items={api} currentCategorie={currentCategorie}/>
       </div>
     </div>

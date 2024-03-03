@@ -2,7 +2,6 @@ import { Eletronics } from "./(components)/products/eletronics";
 import { Header } from "./(components)/header";
 import { Promotion } from "./(components)/promotion";
 import { Details } from "./(components)/details";
-import { Items } from "./(components)/items";
 import { Jewelery } from "./(components)/products/joias";
 import { WomanCloths } from "./(components)/products/woman";
 import { ADS1, ADS2, ADS3 } from "./(components)/ads";
